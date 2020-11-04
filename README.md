@@ -20,7 +20,7 @@ Note the console output that indicates the cloud function has been successfully 
 - change  line 43 of code in the `functions/src/index/ts` as indicated in the file.
 - run `cd functions/emulator && firebase emulators:start` again from root project directory.
 
-Note that the cloud function is not initialised as it does not know the database emulator is running:
+Note that the cloud function is not initialized as it does not know the database emulator is running:
 
 ```bash
 i  functions[rtdblimit]: function ignored because the unknown emulator does not exist or is not running.
