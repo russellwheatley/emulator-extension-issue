@@ -39,7 +39,9 @@ function cleanPath(path: string) {
 
 const configPath = cleanPath(config.nodePath);
 
-export const rtdblimit = functions.database.ref(`${configPath}/{nodeId}`).onCreate(
+//TODO swap line 43 for line 44 for bug
+export const rtdblimit = functions.handler.database.ref.onCreate(
+// export const rtdblimit = functions.database.ref(`${configPath}/{nodeId}`).onCreate(
   async (snapshot): Promise<void> => {
     logs.start();
 

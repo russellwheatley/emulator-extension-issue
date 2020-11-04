@@ -15,7 +15,7 @@
  */
 
 export default {
-  location: process.env.LOCATION,
-  maxCount: Number(process.env.MAX_COUNT),
-  nodePath: process.env.NODE_PATH,
+  location: process.env.LOCATION  || 'europe-west2',
+  maxCount: Number(process.env.MAX_COUNT) || 2,
+  nodePath: process.env.NODE_PATH || "test_path",
 };

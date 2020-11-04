@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rimraf lib",
-    "compile": "tsc",
+    "compile": "tsc -w",
     "test": "jest",
     "generate-readme": "firebase ext:info .. --markdown > ../README.md"
   },

@@ -1,51 +1,27 @@
-# Limit Child Nodes
+## Firebase emulator bug
 
-**Author**: Firebase (**[https://firebase.google.com](https://firebase.google.com)**)
-
-**Description**: Limits the number of nodes to a specified maximum count in a specified Realtime Database path.
+I've copied this code from the `rtdb-limit-child-nodes` extension from this [extension's](https://github.com/firebase/extensions) repo [pull request](https://github.com/firebase/extensions/pull/482).
 
 
 
-**Details**: Use this extension to control the maximum number of nodes stored in a Firebase Realtime Database path.
+## Steps To Recreate
 
-If the number of nodes in your specified Realtime Database path exceeds the specified max count, this extension deletes the oldest nodes first until there are the max count number of nodes remaining.
+- you may have to change the project id in `functions/emulator/firebaserc` file to your own default project id.
+- `cd functions/ && npm i && npm run build`
+- open a new terminal in root project directory  and run `cd functions/emulator && firebase emulators:start` (assuming you have `firebase-tools` installed globally)
 
-#### Additional setup
+Note the console output that indicates the cloud function has been successfully initialized:
 
-Before installing this extension, make sure that you've [set up a Realtime Database instance](https://firebase.google.com/docs/database) in your Firebase project.
+```bash 
+✔  functions[rtdblimit]: database function initialized.
+```
 
-### Billing
- 
-To install an extension, your project must be on the [Blaze (pay as you go) plan](https://firebase.google.com/pricing)
- 
-- You will be charged a small amount (typically around $0.01/month) for the Firebase resources required by this extension (even if it is not used).
-- This extension uses other Firebase and Google Cloud Platform services, which have associated charges if you exceed the service’s free tier:
-  - Cloud Functions (Node.js 10+ runtime. [See FAQs](https://firebase.google.com/support/faq#expandable-24))
-  - Firebase Realtime Database
+- Kill the emulator process
+- change  line 43 of code in the `functions/src/index/ts` as indicated in the file
+- run `cd functions/emulator && firebase emulators:start` again from root project directory
 
+Note that the cloud function is not initialised as it does not know the database emulator is running
 
-
-
-**Configuration Parameters:**
-
-* Cloud Functions location: Where do you want to deploy the functions created for this extension?  You usually want a location close to your database. Realtime Database  instances are located in `us-central1`. For help selecting a  location, refer to the [location selection  guide](https://firebase.google.com/docs/functions/locations).
-
-* Realtime Database path: What is the Realtime Database path for which you want to limit the number of child nodes?
-
-* Maximum count of nodes to keep: What is the maximum count of nodes to keep in your specified database path? The oldest nodes will be deleted first to maintain this max count.
-
-
-
-**Cloud Functions:**
-
-* **rtdblimit:** Listens for new child nodes in your specified Realtime Database path, checks if the max count has been exceeded, then deletes the oldest nodes first, as needed to maintain the max count.
-
-
-
-**Access Required**:
-
-
-
-This extension will operate with the following project IAM roles:
-
-* firebasedatabase.admin (Reason: Allows the extension to delete nodes from your Realtime Database instance.)
+```bash
+i  functions[rtdblimit]: function ignored because the unknown emulator does not exist or is not running.
+```
