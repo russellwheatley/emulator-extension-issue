@@ -7,8 +7,8 @@ I've copied this code from the `rtdb-limit-child-nodes` extension from this [ext
 ## Steps To Recreate
 
 - you may have to change the project id in `functions/emulator/firebaserc` file to your own default project id.
-- `cd functions/ && npm i && npm run build`
-- open a new terminal in root project directory  and run `cd functions/emulator && firebase emulators:start` (assuming you have `firebase-tools` installed globally)
+- run `cd functions/ && npm i && npm run build` from root project directory.
+- open a new terminal in root project directory  and run `cd functions/emulator && firebase emulators:start` (assuming you have `firebase-tools` installed globally).
 
 Note the console output that indicates the cloud function has been successfully initialized:
 
@@ -16,9 +16,9 @@ Note the console output that indicates the cloud function has been successfully 
 ✔  functions[rtdblimit]: database function initialized.
 ```
 
-- Kill the emulator process
-- change  line 43 of code in the `functions/src/index/ts` as indicated in the file
-- run `cd functions/emulator && firebase emulators:start` again from root project directory
+- Kill the emulator process.
+- change  line 43 of code in the `functions/src/index/ts` as indicated in the file.
+- run `cd functions/emulator && firebase emulators:start` again from root project directory.
 
 Note that the cloud function is not initialised as it does not know the database emulator is running:
 
